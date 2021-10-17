@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+import org.junit.Assert;
+
 class StringCalculatorShould {
 
     @Test
@@ -17,5 +20,18 @@ class StringCalculatorShould {
     void string_with_single_number_should_return_number_as_int() {
         StringCalculator stringCalculator = new StringCalculator();
         assertEquals(1, stringCalculator.add("1"));
+    }
+    @Test(expected = RuntimeException.class)
+    public final void whenMoreThan2NumbersAreUsedThenExceptionIsThrown() {
+        StringCalculator.add("1,2,3");
+    }
+    @Test
+    public final void when2NumbersAreUsedThenNoExceptionIsThrown() {
+        StringCalculator.add("1,2");
+        Assert.assertTrue(true);
+    }
+    @Test(expected = RuntimeException.class)
+    public final void whenNonNumberIsUsedThenExceptionIsThrown() {
+        StringCalculator.add("1,X");
     }
 }
