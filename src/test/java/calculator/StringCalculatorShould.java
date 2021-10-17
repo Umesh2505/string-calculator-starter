@@ -33,14 +33,25 @@ class StringCalculatorShould {
     }
     @Test
     public final void whenAnyNumberOfNumbersIsUsedThenReturnValuesAreTheirSums() {
-        Assert.assertEquals(3+6+15+18+46+33, StringCalculator.add("3,6,15,18,46,33"));
+        Assert.assertEquals(1+2+3+4+5+6, StringCalculator.add("1,2,3,4,5,6"));
     }
     @Test
     public final void whenNewLineIsUsedBetweenNumbersThenReturnValuesAreTheirSums() {
-        Assert.assertEquals(3+6+15, StringCalculator.add("3,6n15"));
+        Assert.assertEquals(1+2+3, StringCalculator.add("1,2n3"));
     }
     @Test
     public final void whenDelimiterIsSpecifiedThenItIsUsedToSeparateNumbers() {
-        Assert.assertEquals(3+6+15, StringCalculator.add("//;n3;6;15"));
+        Assert.assertEquals(1+2+3, StringCalculator.add("//;n1;2;3"));
+    }
+    @Test
+    public final void whenNegativeNumbersAreUsedThenRuntimeExceptionIsThrown() {
+        RuntimeException exception = null;
+        try {
+            StringCalculator.add("1,-2,3,-4,5,6");
+        } catch (RuntimeException e) {
+            exception = e;
+        }
+        Assert.assertNotNull(exception);
+        Assert.assertEquals("Negatives not allowed: [-2, -4]", exception.getMessage());
     }
 }

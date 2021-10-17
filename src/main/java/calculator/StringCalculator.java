@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.ArrayList;
+
 class StringCalculator {
 	public static int add(final String numbers) {
 	    String delimiter = ",|n";
@@ -15,12 +17,20 @@ class StringCalculator {
 	public static int add(final String numbers, final String delimiter) { 
 		int returnValue = 0;
 	    String[] numbersArray = numbers.split(delimiter);
+	    ArrayList negativeNumbers = new ArrayList();
 	        for (String number : numbersArray) {
 	            if (!number.trim().isEmpty()) {
-	            	returnValue += Integer.parseInt(number.trim());
+	            	int numberInt = Integer.parseInt(number.trim());
+	            	if (numberInt < 0) {
+	                    negativeNumbers.add(numberInt);
+	                }
+	                returnValue += numberInt;
 	            }
 	        }
-	    
-	    return returnValue;
-	}
+	        if (negativeNumbers.size() > 0) {
+	            throw new RuntimeException("Negatives not allowed: " + negativeNumbers.toString());
+	        }
+	        return returnValue;     
+	    }
 }
+            
