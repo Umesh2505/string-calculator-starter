@@ -1,31 +1,26 @@
 package calculator;
 
 class StringCalculator {
-
-	public static final int add(final String numbers) { // Changed void to int
-	    String[] numbersArray = numbers.split(",");
-	    if (numbersArray.length > 2) {
-	        throw new RuntimeException("Up to 2 numbers separated by comma (,) are allowed");
-	    } else {
+	public static int add(final String numbers) {
+	    String delimiter = ",|n";
+	    String numbersWithoutDelimiter = numbers;
+	    if (numbers.startsWith("//")) {
+	        int delimiterIndex = numbers.indexOf("//") + 2;
+	        delimiter = numbers.substring(delimiterIndex, delimiterIndex + 1);
+	        numbersWithoutDelimiter = numbers.substring(numbers.indexOf("n") + 1);
+	    }
+	    return add(numbersWithoutDelimiter, delimiter);
+	}
+	
+	public static int add(final String numbers, final String delimiter) { 
+		int returnValue = 0;
+	    String[] numbersArray = numbers.split(delimiter);
 	        for (String number : numbersArray) {
-	            if (!number.isEmpty()) {
-	                Integer.parseInt(number);
+	            if (!number.trim().isEmpty()) {
+	            	returnValue += Integer.parseInt(number.trim());
 	            }
 	        }
-	    }
-	    return 0; // Added return
-	}
-	public static int addtwo(final String two numbers) {
-	    int returnValue = 0;
-	    String[] numbersArray = numbers.split(",");
-	    if (numbersArray.length > 2) {
-	        throw new RuntimeException("Up to 2 numbers separated by comma (,) are allowed");
-	    }
-	    for (String number : numbersArray) {
-	        if (!number.trim().isEmpty()) { // After refactoring
-	            returnValue += Integer.parseInt(number);
-	        }
-	    }
+	    
 	    return returnValue;
 	}
 }
