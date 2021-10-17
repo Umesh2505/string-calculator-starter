@@ -54,4 +54,8 @@ class StringCalculatorShould {
         Assert.assertNotNull(exception);
         Assert.assertEquals("Negatives not allowed: [-2, -4]", exception.getMessage());
     }
+    @Test
+    public final void whenOneOrMoreNumbersAreGreaterThan1000IsUsedThenItIsNotIncludedInSum() {
+        Assert.assertEquals(1+1000+2+3, StringCalculator.add("1,2,1000,3,1002,1111,5000"));
+    }
 }

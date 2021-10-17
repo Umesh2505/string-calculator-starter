@@ -24,8 +24,10 @@ class StringCalculator {
 	            	if (numberInt < 0) {
 	                    negativeNumbers.add(numberInt);
 	                }
+	            	else if (numberInt <= 1000) {
 	                returnValue += numberInt;
 	            }
+	        }
 	        }
 	        if (negativeNumbers.size() > 0) {
 	            throw new RuntimeException("Negatives not allowed: " + negativeNumbers.toString());
