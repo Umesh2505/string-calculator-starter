@@ -34,4 +34,8 @@ class StringCalculatorShould {
     public final void whenNonNumberIsUsedThenExceptionIsThrown() {
         StringCalculator.add("1,X");
     }
+    @Test
+    public final void whenTwoNumbersAreUsedThenReturnValueIsTheirSum() {
+        Assert.assertEquals(3+6, StringCalculator.add("3,6"));
+    }
 }
